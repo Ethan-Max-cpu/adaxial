@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import icon01 from '@/assets/icons/icon-01.png';
-import icon02 from '@/assets/icons/icon-02.png';
-import icon03 from '@/assets/icons/icon-03.png';
+import icon01 from '@/assets/icons/icon-04.png';
+import icon02 from '@/assets/icons/icon-05.png';
+import icon03 from '@/assets/icons/icon-06.png';
 export default {
   name: 'StepsComponent',
   data() {

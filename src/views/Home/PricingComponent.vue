@@ -58,7 +58,7 @@
         <div 
           v-for="(plan, index) in filteredPlans" 
           :key="plan.id"
-          class="relative w-full sm:w-[calc(100%-2rem)] md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm"
+          class="relative w-full sm:w-[calc(100%-1rem)] md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm"
         >
           <!-- Most Popular 徽章 - 优化移动端显示 -->
           <div v-if="plan.popular" class="absolute -top-3 md:-top-3 left-1/2 transform -translate-x-1/2 z-20">
@@ -80,30 +80,33 @@
 
           <!-- 卡片容器 - 移动端高度自适应 -->
           <div
-            class="relative h-auto md:h-[650px] min-h-[580px] md:min-h-[650px] overflow-hidden transition-transform duration-300 hover:scale-[1.02] border border-gray-200 rounded-xl shadow-md hover:shadow-lg"
+            class="relative h-auto md:h-[650px] min-h-[550px] md:min-h-[650px] overflow-hidden transition-transform duration-300 hover:scale-[1.02] rounded-xl shadow-lg hover:shadow-xl"
+            :style="plan.cardStyle"
             :class="plan.cardClasses">
-            <!-- 卡片背景渐变层 -->
-            <div class="absolute inset-0 rounded-xl" :class="plan.gradientBg"></div>
+            
+            <!-- 卡片背景图片 -->
+            <div class="absolute inset-0 rounded-xl bg-cover bg-center" :style="plan.backgroundImageStyle"></div>
 
             <!-- 卡片内容 -->
             <div class="relative p-4 md:p-6 h-full flex flex-col">
               <!-- 套餐名称 -->
               <div style="text-align: center; margin-bottom: 1rem;">
-                <h3 class="plan-title">
+                <!-- 标题改为黑色 -->
+                <h3 class="plan-title text-gray-900">
                   {{ plan.name }}
                 </h3>
               </div>
               
-              <!-- Get started 按钮 - 优化移动端 -->
+              <!-- Get started 按钮 - 苹果绿色 -->
               <div class="mb-4 md:mb-6">
                 <button 
                   @click="handleSelectPlan(plan)"
-                  class="w-full py-3 md:py-3 text-white font-semibold text-sm md:text-sm tracking-wider uppercase transition-all duration-300 relative overflow-hidden active:scale-95 rounded-lg"
+                  class="w-full py-3 md:py-3 text-white font-semibold text-sm md:text-sm tracking-wider uppercase transition-all duration-300 relative overflow-hidden active:scale-95 rounded-lg shadow-lg hover:shadow-xl"
                   :class="plan.buttonClasses"
                 >
                   <span class="relative z-10">Get started</span>
                   <div
-                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-shimmer">
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer">
                   </div>
                 </button>
               </div>
@@ -115,17 +118,17 @@
                   :key="featureIndex" 
                   class="flex items-start"
                 >
-                  <!-- 小对号图标 -->
+                  <!-- 小对号图标 - 改为绿色 -->
                   <div class="mr-2 md:mr-3 mt-0.5 flex-shrink-0">
-                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                         clip-rule="evenodd" />
                     </svg>
                   </div>
-                  <!-- 使用解析函数 -->
+                  <!-- 使用解析函数 - 文字改为黑色 -->
                   <span 
-                    class="text-xs md:text-sm text-gray-700 leading-relaxed" 
+                    class="text-xs md:text-sm text-gray-900 leading-relaxed" 
                     v-html="parseBoldText(feature)"
                   ></span>
                 </div>
@@ -140,15 +143,17 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+// 假设你的背景图片是 pricing-background.jpg
+import backgroundImage from '@/assets/images/pricing-background.jpg'
 
 // 当前选中的平台
-const activePlatform = ref('meta') // 默认选中Meta
+const activePlatform = ref('main') // 默认选中Meta
 
 // 平台数据
 const platforms = ref([
   { 
-    id: 'meta', 
-    name: 'Meta', 
+    id: 'main', 
+    name: 'Main', 
     activeGradient: 'bg-gradient-to-r from-blue-500 to-emerald-500' 
   },
   { 
@@ -158,42 +163,58 @@ const platforms = ref([
   }
 ])
 
-// 所有平台的套餐数据 - 更新样式以适配白色背景
+// 使用本地背景图片
+const backgroundImages = {
+  default: backgroundImage,
+  // 如果你有其他本地图片，也可以添加
+  // tech1: require('@/assets/images/your-other-image.jpg')
+}
+
+// 所有平台的套餐数据 - 使用背景图片
 const allPlans = ref({
-  meta: [
+  main: [
     {
       id: 'meta-bronze',
       name: 'Meta',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-amber-50/50 to-amber-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Accepting All**',
-        'Fee: 2.5%-4% (Depending on the spend ped day) Unlimited account supply',
         'Unlimited account supply',
         'Run Ads for Almost Any Vertical',
         'Strong agency ad account included',
         'Lifetime replacements on the ad account',
-        '1x FB setup included ($300 value)',
         'Earn cashback or CC points',
-        'No Bans & Restrictions **Reallocate balance between accounts if suspended**'
+        'No Bans & Restrictions',
+        '**Reallocate balance between accounts if suspended**',
+        'Top up via Bank/Crypto（+1% fee）'
       ]
     },
     {
       id: 'meta-gold',
       name: 'TikTok',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-amber-50/50 to-amber-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Accepting All**',
-        'Fee: 0%-6% (Depending on the spend ped day)',
         'Unlimited spend',
         'Unlimited account supply',
         'Target 55+ countries',
-        'Reallocate balance between accounts if suspended',
+        '**Reallocate balance between accounts if suspended**',
         'Full access to advertising features (branding, conversion,...)',
         'Top up via Bank/Crypto（+1% fee） '
       ]
@@ -202,14 +223,18 @@ const allPlans = ref({
       id: 'meta-diamond',
       name: 'Google',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-amber-50/50 to-amber-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Only Whitehat**',
-        'Fee: 1.5%-3% (Depending on the spend ped day)',
         'Unlimited spend',
-        'Reallocate balance between accounts if suspended',
+        '**Reallocate balance between accounts if suspended**',
         'Top up via Bank/Crypto（+1% fee）'
       ]
     }
@@ -220,9 +245,14 @@ const allPlans = ref({
       name: 'Bigo',
       price: '$599',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-amber-50/50 to-amber-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Accepting All**',
         'No Fee',
@@ -238,9 +268,14 @@ const allPlans = ref({
       name: 'Taboola',
       price: '$599',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-yellow-50/50 to-yellow-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Accepting All**',
         'Fee：3%-9%',
@@ -255,9 +290,14 @@ const allPlans = ref({
       name: 'Newsbreak',
       price: '$399',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-yellow-50/50 to-yellow-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Only Whitehat**',
         'No Fee',
@@ -273,9 +313,14 @@ const allPlans = ref({
       name: 'Snapchat',
       price: '$399',
       popular: false,
-      cardClasses: 'bg-white/90 border border-gray-200 shadow-lg',
-      gradientBg: 'bg-gradient-to-br from-amber-50/50 to-amber-100/30',
-      buttonClasses: 'bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 shadow-md',
+      cardClasses: '',
+      cardStyle: '',
+      backgroundImageStyle: {
+        backgroundImage: `url(${backgroundImages.default})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      },
+      buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Only Whitehat**',
         'No Fee',
@@ -335,9 +380,9 @@ const parseBoldText = (text) => {
 
 /* 套餐名称样式 - 增加字体大小并居中 */
 .plan-title {
-  font-weight: 700; /* 加粗 */
+  font-weight: 800; /* 更粗 */
   text-align: center; /* 居中 */
-  color: #111827; /* 深灰色 */
+  color: #111827; /* 黑色文字 */
   margin: 0 0 0.5rem 0; /* 底部间距 */
   padding: 0;
   line-height: 1.2;
@@ -352,12 +397,57 @@ const parseBoldText = (text) => {
   .plan-title {
     font-size: 1.875rem; /* 30px - 移动端也大幅增加 */
   }
+  
+  /* 卡片容器移动端优化 */
+  .min-h-\[550px\] {
+    min-height: 500px; /* 移动端稍微减少高度 */
+  }
+  
+  /* 卡片宽度优化 */
+  .sm\:w-\[calc\(100\%-1rem\)\] {
+    width: calc(100% - 0.5rem);
+  }
+  
+  /* 卡片间距优化 */
+  .gap-4 > * {
+    margin-bottom: 1rem; /* 16px */
+  }
+  
+  /* 按钮优化 */
+  button[class*="Get started"]:active {
+    transform: scale(0.98);
+  }
+  
+  /* 权益文字大小优化 */
+  .text-xs {
+    font-size: 0.813rem; /* 13px */
+  }
+  
+  /* 对号图标优化 */
+  .w-3\.5.h-3\.5 {
+    width: 1rem;
+    height: 1rem;
+  }
 }
 
 /* 平板设备优化 */
 @media (min-width: 768px) and (max-width: 1023px) {
   .plan-title {
     font-size: 2.25rem; /* 36px - 平板端 */
+  }
+  
+  /* 卡片宽度调整为每行2个 */
+  .md\:w-\[calc\(50\%-1rem\)\] {
+    width: calc(50% - 1rem);
+  }
+  
+  /* 卡片高度调整 */
+  .md\:h-\[650px\] {
+    height: 600px;
+  }
+  
+  .md\:min-h-\[650px\] {
+    min-height: 600px;
   }
 }
 
@@ -372,46 +462,6 @@ const parseBoldText = (text) => {
 @media (min-width: 1280px) {
   .plan-title {
     font-size: 2.75rem; /* 44px - 在超宽屏幕上更大 */
-  }
-}
-
-/* 移动端优化 */
-@media (max-width: 767px) {
-  /* 卡片容器移动端优化 */
-  .min-h-\[580px\] {
-    min-height: 520px; /* 移动端稍微减少高度 */
-  }
-  
-  /* 按钮优化 */
-  button[class*="Get started"]:active {
-    transform: scale(0.98);
-  }
-  
-  /* 卡片间距优化 */
-  .gap-4 > * {
-    margin-bottom: 1rem; /* 16px */
-  }
-  
-  /* 平台选择器在移动端优化 */
-  .md\\:hidden select {
-    font-size: 1rem; /* 16px */
-  }
-}
-
-/* 平板设备优化 */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* 卡片宽度调整为每行2个 - 需要根据实际类名调整 */
-  .md-w-calc-50-1rem {
-    width: calc(50% - 1rem);
-  }
-  
-  /* 卡片高度调整 - 需要根据实际类名调整 */
-  .md-h-650px {
-    height: 600px;
-  }
-  
-  .md-min-h-650px {
-    min-height: 600px;
   }
 }
 

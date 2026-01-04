@@ -71,8 +71,8 @@ const route = useRoute()
 const isOpen = ref(false)
 
 const navItems = [
-  { name: 'PORTFOLIO', path: '/' },
-  { name: '联系我们', path: '/contact' }
+  { name: 'PORTFOLIO', path: '/' }
+  // { name: '联系我们', path: '/contact' }
 ]
 </script>
 

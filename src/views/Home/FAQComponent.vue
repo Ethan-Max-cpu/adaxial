@@ -17,7 +17,7 @@
             target="_blank"
             class="social-button telegram-button"
           >
-            Join telegram
+            Join Telegram
           </a>
           <a 
             href="https://api.whatsapp.com/send?phone=8618603352371&text=hello" 
@@ -177,33 +177,34 @@ const faqItems = ref([
   line-height: 1.4;
 }
 
+/* 修改按钮边框为绿色 */
 .telegram-button {
   background-color: #f8f9fa;
   color: #333;
-  border-color: #8b5cf6;
+  border-color: #10b981; /* 绿色边框 */
   border-width: 1px;
 }
 
 .telegram-button:hover {
   background-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(139, 92, 246, 0.2);
-  border-color: #8b5cf6;
+  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2); /* 绿色阴影 */
+  border-color: #10b981; /* 绿色边框 */
   border-width: 1px;
 }
 
 .whatsapp-button {
   background-color: #f8f9fa;
   color: #333;
-  border-color: #8b5cf6;
+  border-color: #10b981; /* 绿色边框 */
   border-width: 1px;
 }
 
 .whatsapp-button:hover {
   background-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(139, 92, 246, 0.2);
-  border-color: #8b5cf6;
+  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2); /* 绿色阴影 */
+  border-color: #10b981; /* 绿色边框 */
   border-width: 1px;
 }
 
@@ -285,10 +286,10 @@ const faqItems = ref([
   transform: translateY(-2px);
 }
 
-/* 激活状态 */
+/* 激活状态 - 修改为绿色边框 */
 :deep(.el-collapse-item.is-active) {
-  border-color: #8b5cf6; /* 激活时边框变为紫色 */
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+  border-color: #10b981; /* 激活时边框变为绿色 */
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15); /* 绿色阴影 */
 }
 
 /* 问题标题样式优化 */
@@ -342,10 +343,11 @@ const faqItems = ref([
   color: #4b5563;
 }
 
+/* 激活时箭头变为绿色 */
 :deep(.el-collapse-item__arrow.is-active) {
   transform: rotate(-90deg);
-  color: #8b5cf6; /* 激活时箭头变为紫色 */
-  background: rgba(139, 92, 246, 0.1);
+  color: #10b981; /* 激活时箭头变为绿色 */
+  background: rgba(16, 185, 129, 0.1); /* 绿色背景 */
 }
 
 :deep(.el-collapse-item__wrap) {
