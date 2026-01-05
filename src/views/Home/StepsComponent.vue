@@ -121,12 +121,12 @@ export default {
   text-align: center;
 }
 
-/* 紫色字体缩小一号，适配白色背景 */
+/* 修改为绿色字体 */
 .title-section h1 {
   font-size: 2.0rem; /* 从 3rem 减小到 2.5rem */
   line-height: 1.1;
   margin-bottom: 12px;
-  background: linear-gradient(90deg, #7d5fff, #4a6ee0);
+  background: linear-gradient(90deg, #10b981, #059669); /* 修改为绿色渐变 */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -205,16 +205,18 @@ export default {
   border-color: #d1d5db; /* 悬停时边框变深 */
 }
 
+/* 修改为绿色边框 */
 .step-item.active {
   background-color: rgba(241, 245, 249, 0.9); /* 激活状态背景 */
-  border-left: 4px solid #7d5fff;
-  border-color: #7d5fff; /* 激活时整个边框也变紫色 */
-  box-shadow: 0 5px 15px rgba(125, 95, 255, 0.15);
+  border-left: 4px solid #10b981; /* 修改为绿色 */
+  border-color: #10b981; /* 激活时整个边框也变绿色 */
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.15); /* 修改为绿色阴影 */
 }
 
+/* 修改步骤数字为绿色 */
 .step-number {
   font-size: 0.9rem;
-  color: #7d5fff; /* 保持紫色 */
+  color: #10b981; /* 修改为绿色 */
   font-weight: 700;
   margin-bottom: 8px;
   letter-spacing: 1.2px;
@@ -273,7 +275,7 @@ export default {
   right: -30%;
   width: 250px;
   height: 250px;
-  background: rgba(125, 95, 255, 0.05); /* 改为紫色半透明 */
+  background: rgba(16, 185, 129, 0.05); /* 修改为绿色半透明 */
   border-radius: 50%;
   z-index: 0;
 }
@@ -285,7 +287,7 @@ export default {
   left: -15%;
   width: 180px;
   height: 180px;
-  background: rgba(74, 110, 224, 0.03); /* 改为蓝色半透明 */
+  background: rgba(5, 150, 105, 0.03); /* 修改为深绿色半透明 */
   border-radius: 50%;
   z-index: 0;
 }
@@ -606,7 +608,7 @@ export default {
 /* 对于超小屏幕，确保副标题正常显示 */
 @media (max-width: 480px) {
   .title-section h1 {
-    font-size: 1.4rem; /* 超小屏幕进一步缩小紫色字体 */
+    font-size: 1.4rem; /* 超小屏幕进一步缩小绿色字体 */
   }
   
   .title-section h2 {
