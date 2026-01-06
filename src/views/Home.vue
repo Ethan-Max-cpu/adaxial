@@ -31,6 +31,7 @@
     <WelcomeComponent />
     <AboutusComponent />
     <WhyadawakenComponent />
+    <DisplayComponent />
     <StepsComponent />
     <TestimonialsComponent />
     <PricingComponent id="pricing-section" />
@@ -47,6 +48,7 @@ import TestimonialsComponent from './Home/TestimonialsComponent.vue'
 import PricingComponent from './Home/PricingComponent.vue'
 import FAQComponent from './Home/FAQComponent.vue'
 import WelcomeComponent from './Home/WelcomeComponent.vue'
+import DisplayComponent from './Home/DisplayComponent.vue'
 </script>
 
 <style scoped>

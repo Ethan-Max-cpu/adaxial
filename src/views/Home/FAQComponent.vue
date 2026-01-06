@@ -13,18 +13,21 @@
         <!-- 新增按钮区域 -->
         <div class="button-group">
           <a 
-            href="https://t.me/luluyanyan2002" 
-            target="_blank"
-            class="social-button telegram-button"
-          >
-            Join Telegram
-          </a>
-          <a 
             href="https://api.whatsapp.com/send?phone=8618603352371&text=hello" 
             target="_blank"
             class="social-button whatsapp-button"
           >
-            Join Whatsapp
+            <span class="button-text">WhatsApp</span>
+            <!-- 使用img标签，不需要filter -->
+            <img :src="whatsappIcon" class="whatsapp-icon-img" alt="WhatsApp" />
+          </a>
+          <a 
+            href="https://t.me/luluyanyan2002" 
+            target="_blank"
+            class="social-button telegram-button"
+          >
+            <span class="button-text">Telegram</span>
+            <span class="button-icon telegram-icon"></span>
           </a>
         </div>
       </div>
@@ -57,18 +60,20 @@
       <!-- 移动端按钮区域 -->
       <div class="button-group mobile-button-group">
         <a 
-          href="https://t.me/luluyanyan2002" 
-          target="_blank"
-          class="social-button telegram-button"
-        >
-          Join telegram
-        </a>
-        <a 
           href="https://api.whatsapp.com/send?phone=8618603352371&text=hello" 
           target="_blank"
           class="social-button whatsapp-button"
         >
-          Join Whatsapp
+          <span class="button-text">WhatsApp</span>
+          <img :src="whatsappIcon" class="whatsapp-icon-img" alt="WhatsApp" />
+        </a>
+        <a 
+          href="https://t.me/luluyanyan2002" 
+          target="_blank"
+          class="social-button telegram-button"
+        >
+          <span class="button-text">Telegram</span>
+          <span class="button-icon telegram-icon"></span>
         </a>
       </div>
       
@@ -93,9 +98,13 @@
 <script setup>
 import { ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
+import whatsapp from '@/assets/images/whatsapp.png'
 
 // 当前展开的问题
 const activeNames = ref([])
+
+// WhatsApp图标 - 使用图片链接
+const whatsappIcon = whatsapp
 
 // FAQ数据
 const faqItems = ref([
@@ -116,13 +125,13 @@ const faqItems = ref([
   },
   {
     id: 4,
-    question: 'How much for extra ad accounts?',
-    answer: 'We charge +$30/month per each additional ad account.\nThis means 1 extra ad account = +$30.\nA 2nd extra ad account = $30 + $30 = +$60\nA 3rd extra ad account = $100 + $30 = +$130\nA 4th extra account = $150 + $30 = +$180 etc. etc.'
+    question: 'How much does it cost to work with you?',
+    answer: 'The pricing for our Agency Ad Accounts varies across different advertising platforms. Our pricing model involves a fixed monthly fee plus a percentage on each top-up. Feel free to contact us, and we\'ll work together to find the perfect plan for your business.'
   },
   {
     id: 5,
-    question: 'Where do I get my setup from?',
-    answer: 'We partnered up with alphavault.store - our preferred partner for assets. Each client is eligible for 1x FB setup (1x Account + 1x BM + 1x Page) upon purchase, and afterwards a monthly credit of $50 for assets.'
+    question: 'Do you work with businesses of all sizes?',
+    answer: 'Yes, we work with businesses of all sizes, from small startups to large corporations. Our services are customized based on the specific needs and goals of each client.'
   }
 ])
 </script>
@@ -151,66 +160,109 @@ const faqItems = ref([
   height: fit-content;
 }
 
-/* 新增按钮组样式 */
+/* 修改按钮组样式 - 根据图片样式 */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
   margin-top: 30px;
   text-align: left;
+  width: 100%;
+  max-width: 280px;
 }
 
 .social-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 16px 24px;
+  border-radius: 50px;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 2px solid transparent;
-  min-height: 50px;
+  border: none;
+  height: 56px;
+  min-height: 56px;
   text-align: center;
-  line-height: 1.4;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
-/* 修改按钮边框为绿色 */
-.telegram-button {
-  background-color: #f8f9fa;
-  color: #333;
-  border-color: #10b981; /* 绿色边框 */
-  border-width: 1px;
-}
-
-.telegram-button:hover {
-  background-color: #ffffff;
+.social-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2); /* 绿色阴影 */
-  border-color: #10b981; /* 绿色边框 */
-  border-width: 1px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+.social-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* WhatsApp按钮 - 绿色背景，白色文字 */
 .whatsapp-button {
-  background-color: #f8f9fa;
-  color: #333;
-  border-color: #10b981; /* 绿色边框 */
-  border-width: 1px;
+  background-color: #25D366;
+  color: white;
 }
 
 .whatsapp-button:hover {
-  background-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2); /* 绿色阴影 */
-  border-color: #10b981; /* 绿色边框 */
-  border-width: 1px;
+  background-color: #1ebe5d;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
 }
 
-/* 修改主标题 - 确保在一行内展示 */
+/* Telegram按钮 - 浅蓝色背景，白色文字 */
+.telegram-button {
+  background-color: #2AABEE;
+  color: white;
+}
+
+.telegram-button:hover {
+  background-color: #229ed9;
+  box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
+}
+
+/* 按钮文字样式 */
+.button-text {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  font-size: 16px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* WhatsApp图片图标样式 - 移除filter */
+.whatsapp-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-left: 12px;
+  /* 如果图片是白色电话图标，就不需要filter */
+}
+
+/* Telegram SVG图标样式 */
+.button-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.9;
+  filter: brightness(0) invert(1);
+  margin-left: 12px;
+}
+
+.telegram-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.509l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.022c.242-.213-.054-.333-.373-.12l-6.87 4.326-2.96-.924c-.643-.204-.656-.643.135-.953l11.57-4.458c.536-.196 1.006.128.832.949z'/%3E%3C/svg%3E");
+}
+
+/* 修改主标题 */
 .faq-title {
-  font-size: 32px; /* 调整字体大小确保在一行内 */
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 20px;
@@ -218,11 +270,11 @@ const faqItems = ref([
   text-align: left;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   letter-spacing: -0.5px;
-  white-space: nowrap; /* 强制在一行内显示 */
-  overflow: hidden; /* 隐藏溢出部分 */
-  text-overflow: ellipsis; /* 如果文本太长显示省略号 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: block;
-  max-width: 100%; /* 确保不超过容器宽度 */
+  max-width: 100%;
 }
 
 .faq-subtitle {
@@ -232,23 +284,7 @@ const faqItems = ref([
   margin-bottom: 0;
   text-align: left;
   font-weight: 400;
-  margin-top: 8px; /* 增加与标题的距离 */
-}
-
-.contact-link {
-  color: #333333;
-  text-decoration: none;
-  border-bottom: none;
-  padding-bottom: 0;
-  transition: opacity 0.3s ease;
-  display: inline-block;
-  font-weight: 500;
-  margin-left: 4px;
-}
-
-.contact-link:hover {
-  opacity: 0.8;
-  text-decoration: none;
+  margin-top: 8px;
 }
 
 .faq-right {
@@ -260,47 +296,43 @@ const faqItems = ref([
   display: none;
 }
 
-/* Element Plus 组件样式覆盖 - 要求1: 添加美观的灰色边框 */
+/* Element Plus 组件样式覆盖 */
 :deep(.el-collapse) {
   border: none;
   background: transparent;
   text-align: left;
 }
 
-/* 为每个FAQ项目添加圆角灰色边框 */
 :deep(.el-collapse-item) {
-  border: 1px solid #e5e7eb; /* 浅灰色边框 */
-  border-radius: 12px; /* 圆角边框 */
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   background: #ffffff;
-  margin-bottom: 16px; /* 增加间距 */
+  margin-bottom: 16px;
   text-align: left;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* 轻微阴影增加层次感 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  overflow: hidden; /* 确保圆角效果 */
+  overflow: hidden;
 }
 
-/* 悬停效果 */
 :deep(.el-collapse-item:hover) {
-  border-color: #d1d5db; /* 悬停时边框颜色变深 */
+  border-color: #d1d5db;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
-/* 激活状态 - 修改为绿色边框 */
 :deep(.el-collapse-item.is-active) {
-  border-color: #10b981; /* 激活时边框变为绿色 */
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15); /* 绿色阴影 */
+  border-color: #10b981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
 }
 
-/* 问题标题样式优化 */
 :deep(.el-collapse-item__header) {
   height: auto;
-  min-height: 72px; /* 增加高度 */
+  min-height: 72px;
   line-height: 1.4;
   font-size: 18px;
   background: transparent;
-  color: #1f2937; /* 深灰色文字 */
-  padding: 20px 24px; /* 增加内边距 */
+  color: #1f2937;
+  padding: 20px 24px;
   border: none;
   display: flex;
   align-items: center;
@@ -308,19 +340,19 @@ const faqItems = ref([
   transition: all 0.3s ease;
   text-align: left;
   justify-content: flex-start;
-  font-weight: 600; /* 加粗字体 */
-  border-radius: 12px 12px 0 0; /* 顶部圆角 */
+  font-weight: 600;
+  border-radius: 12px 12px 0 0;
 }
 
 :deep(.el-collapse-item__header:hover) {
-  color: #111827; /* 更深的灰色 */
-  background-color: #f9fafb; /* 悬停背景色 */
+  color: #111827;
+  background-color: #f9fafb;
   padding-left: 24px;
   padding-right: 24px;
 }
 
 :deep(.el-collapse-item__arrow) {
-  color: #6b7280; /* 中灰色箭头 */
+  color: #6b7280;
   font-size: 20px;
   font-weight: 200;
   margin-right: 0;
@@ -343,25 +375,24 @@ const faqItems = ref([
   color: #4b5563;
 }
 
-/* 激活时箭头变为绿色 */
 :deep(.el-collapse-item__arrow.is-active) {
   transform: rotate(-90deg);
-  color: #10b981; /* 激活时箭头变为绿色 */
-  background: rgba(16, 185, 129, 0.1); /* 绿色背景 */
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
 }
 
 :deep(.el-collapse-item__wrap) {
   background: transparent;
   border: none;
   text-align: left;
-  border-top: 1px solid #f3f4f6; /* 内容区域顶部边框 */
+  border-top: 1px solid #f3f4f6;
 }
 
 :deep(.el-collapse-item__content) {
-  padding: 0 24px 20px; /* 增加左右和下边距 */
+  padding: 0 24px 20px;
   font-size: 16px;
   line-height: 1.6;
-  color: #4b5563; /* 中灰色文字 */
+  color: #4b5563;
   background: transparent;
   text-align: left;
   font-weight: 400;
@@ -379,15 +410,14 @@ const faqItems = ref([
   }
 }
 
-/* 问题标题确保左对齐 */
 .question-title {
   flex: 1;
   padding-right: 20px;
-  font-weight: 600; /* 加粗 */
+  font-weight: 600;
   text-align: left;
   width: 100%;
   color: #1f2937;
-  font-size: 16px; /* 稍微缩小字体 */
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -426,15 +456,15 @@ const faqItems = ref([
     display: block;
   }
   
-  /* 移动端标题字体调整 - 确保在一行内 */
+  /* 移动端标题字体调整 */
   .faq-title {
-    font-size: 24px; /* 移动端适当减小字体 */
+    font-size: 24px;
     margin-bottom: 16px;
     text-align: left;
     font-weight: 700;
     letter-spacing: -0.3px;
-    white-space: normal; /* 移动端允许换行 */
-    line-height: 1.3; /* 调整行高 */
+    white-space: normal;
+    line-height: 1.3;
   }
   
   .faq-subtitle {
@@ -444,28 +474,45 @@ const faqItems = ref([
     color: #666666;
   }
   
-  /* 移动端按钮样式 */
+  /* 移动端按钮样式优化 */
   .mobile-button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     margin-top: 20px;
     margin-bottom: 30px;
+    width: 100%;
   }
   
   .mobile-button-group .social-button {
     width: 100%;
     font-size: 15px;
-    padding: 14px 20px;
+    padding: 16px 20px;
+    height: 52px;
+    min-height: 52px;
+    border-radius: 50px;
+  }
+  
+  .mobile-button-group .button-text {
+    font-size: 15px;
+  }
+  
+  .mobile-button-group .whatsapp-icon-img,
+  .mobile-button-group .button-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
   }
   
   /* 移动端FAQ边框样式优化 */
   :deep(.el-collapse-item) {
-    border-radius: 10px; /* 稍微小的圆角 */
+    border-radius: 10px;
     margin-bottom: 12px;
   }
   
-  /* 移动端问题列表左对齐优化 */
   :deep(.el-collapse-item__header) {
     font-size: 16px;
-    padding: 16px 20px; /* 移动端适当减小内边距 */
+    padding: 16px 20px;
     min-height: 60px;
     text-align: left;
     display: flex;
@@ -484,7 +531,6 @@ const faqItems = ref([
     padding: 0 20px 16px;
   }
   
-  /* 移动端箭头样式调整 */
   :deep(.el-collapse-item__arrow) {
     width: 24px;
     height: 24px;
@@ -500,17 +546,12 @@ const faqItems = ref([
   .faq-mobile .faq-subtitle {
     text-align: left;
   }
-  
-  .contact-link {
-    text-decoration: none;
-    border-bottom: none;
-  }
 }
 
 /* 小屏幕手机适配 */
 @media (max-width: 480px) {
   .faq-title {
-    font-size: 20px; /* 在小屏幕上进一步减小字体 */
+    font-size: 20px;
     line-height: 1.2;
   }
   
@@ -518,9 +559,26 @@ const faqItems = ref([
     font-size: 15px;
   }
   
+  .mobile-button-group {
+    gap: 10px;
+  }
+  
   .mobile-button-group .social-button {
-    padding: 12px 16px;
+    padding: 14px 16px;
+    height: 48px;
+    min-height: 48px;
     font-size: 14px;
+  }
+  
+  .mobile-button-group .button-text {
+    font-size: 14px;
+  }
+  
+  .mobile-button-group .whatsapp-icon-img,
+  .mobile-button-group .button-icon {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
   }
   
   :deep(.el-collapse-item) {
@@ -551,14 +609,14 @@ const faqItems = ref([
   }
 }
 
-/* 平板设备适配 - 调整标题以适合一行 */
+/* 平板设备适配 */
 @media (min-width: 769px) and (max-width: 1024px) {
   .faq-desktop {
     gap: 40px;
   }
   
   .faq-title {
-    font-size: 28px; /* 平板设备上调整字体大小 */
+    font-size: 28px;
     text-align: left;
     font-weight: 700;
     white-space: nowrap;
@@ -578,8 +636,20 @@ const faqItems = ref([
   
   /* 中等屏幕按钮调整 */
   .social-button {
-    padding: 10px 20px;
+    padding: 14px 20px;
     font-size: 15px;
+    height: 52px;
+  }
+  
+  .button-text {
+    font-size: 15px;
+  }
+  
+  .whatsapp-icon-img,
+  .button-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
   }
   
   /* 平板端折叠面板调整 */
@@ -624,9 +694,9 @@ const faqItems = ref([
   }
   
   .faq-title {
-    font-size: 36px; /* 超大屏幕上适当增大字体 */
+    font-size: 36px;
     white-space: nowrap;
-    overflow: visible; /* 超大屏幕上不需要隐藏 */
+    overflow: visible;
   }
   
   .faq-subtitle {
@@ -634,8 +704,20 @@ const faqItems = ref([
   }
   
   .social-button {
-    font-size: 18px;
-    padding: 15px 30px;
+    font-size: 16px;
+    padding: 18px 28px;
+    height: 60px;
+  }
+  
+  .button-text {
+    font-size: 16px;
+  }
+  
+  .whatsapp-icon-img,
+  .button-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 12px;
   }
   
   /* 大屏幕FAQ边框优化 */

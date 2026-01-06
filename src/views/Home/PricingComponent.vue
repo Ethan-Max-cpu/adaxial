@@ -255,7 +255,6 @@ const allPlans = ref({
       buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Accepting All**',
-        'No Fee',
         'No restrictions, No Prohibitions',
         'Unlimited spend',
         'Unlimited account supply',
@@ -278,7 +277,6 @@ const allPlans = ref({
       buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Accepting All**',
-        'Fee：3%-9%',
         'No restrictions, No Prohibitions',
         'Unlimited spend',
         'Target 55+ countries   ',
@@ -300,7 +298,6 @@ const allPlans = ref({
       buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Only Whitehat**',
-        'No Fee',
         'No restrictions, No Prohibitions',
         'Unlimited spend',
         'Unlimited account supply',
@@ -323,7 +320,6 @@ const allPlans = ref({
       buttonClasses: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 border-2 border-green-300/30 shadow-lg',
       features: [
         '**Only Whitehat**',
-        'No Fee',
         'No restrictions, No Prohibitions',
         'Unlimited spend',
         'Unlimited account supply',

@@ -45,15 +45,15 @@
 import { ref } from 'vue'
 import { ElButton, ElIcon } from 'element-plus'
 import { ArrowRight } from '@element-plus/icons-vue'
-import Bigo from '@/assets/images/Bigo.png';
-import Bing from '@/assets/images/Bing.png';
-import Facebook from '@/assets/images/Facebook.png';
-import Google from '@/assets/images/Google.png';
-import Newsbreak from '@/assets/images/Newsbreak.png';
-import Snapchat from '@/assets/images/Snapchat.png';
-import Taboola from '@/assets/images/Taboola.png';
-import TikTok from '@/assets/images/TikTok.png';
-import Twitter from '@/assets/images/Twitter.png';
+import Bigo from '@/assets/images/Bigo.png'
+import Bing from '@/assets/images/Bing.png'
+import Facebook from '@/assets/images/Facebook.png'
+import Google from '@/assets/images/Google.png'
+import Newsbreak from '@/assets/images/Newsbreak.png'
+import Snapchat from '@/assets/images/Snapchat.png'
+import Taboola from '@/assets/images/Taboola.png'
+import TikTok from '@/assets/images/TikTok.png'
+import Twitter from '@/assets/images/Twitter.png'
 
 // 响应式平台数据，确保顺序与图片一致
 const platforms = ref([
